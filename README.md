@@ -1,1 +1,1 @@
-# speech-to-text-transcription using ESP 32 in Ardunio IDE
+# speech-to-text-transcription using ESP 32 in Arduino IDE
