@@ -3,6 +3,7 @@
 #include <WiFi.h>  // only included here
 #include <SD.h>    // also needed in other tabs (.ino)
 
+
 #include <Audio.h>  // needed for PLAYING Audio (via I2S Amplifier, e.g. MAX98357) with ..
                     // Audio.h library from Schreibfaul1: https://github.com/schreibfaul1/ESP32-audioI2S
                     // .. ensure you have actual version (July 18, 2024 or newer needed for 8bit wav files!)
