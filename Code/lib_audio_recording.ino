@@ -33,10 +33,8 @@
 
 #define I2S_WS      22          // add-on: L/R pin INMP441 on Vcc is RIGHT channel, connected to GND is LEFT channel
 #define I2S_SD      35          
-#define I2S_SCK     33     
+#define I2S_SCK     33    
 
-
-// --- define your settings ----
 
 #define SAMPLE_RATE             16000  // typical values: 8000 .. 44100, use e.g 8K (and 8 bit mono) for smallest .wav files  
                                        // hint: best quality with 16000 or 24000 (above 24000: random dropouts and distortions)
@@ -50,7 +48,6 @@
                                        // multiplier, values: 1-64 (32 seems best value for INMP441)
                                        // 64: high background noise but working well for STT on quiet human conversations
 
-
 /*// Links of interest:
 // SD Card Arduino library info: https://www.arduino.cc/reference/en/libraries/sd/
 // SD Card ESP details: https://randomnerdtutorials.com/esp32-microsd-card-arduino/
@@ -61,8 +58,6 @@
 // Code below is mainly based on Espressif API I2S Reference Doc (Latest Master, 3.0.1, June 2024)
 // link: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html#introduction
 // snippets here: https://github.com/espressif/esp-adf/issues/1047 
-
-
 // --- global vars -------------
 
 // [std_cfg]: KALO I2S_std configuration for I2S Input device (Microphone INMP441), detailed definitions (without macros)
