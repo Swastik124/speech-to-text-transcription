@@ -1,0 +1,26 @@
+{
+  "orders": [
+    [
+      {
+        "name": "Tea",
+        "price": 10
+      },
+      {
+        "name": "Coffee",
+        "price": 15
+      },
+      {
+        "name": "Samosa",
+        "price": 12
+      },
+      {
+        "name": "Burger",
+        "price": 40
+      },
+      {
+        "name": "Sandwich",
+        "price": 25
+      }
+    ]
+  ]
+}

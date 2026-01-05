@@ -1,0 +1,30 @@
+{
+    "menu": [
+      {
+        "code": "T1",
+        "name": "Tea",
+        "price": 10.0
+      },
+      {
+        "code": "C1",
+        "name": "Coffee",
+        "price": 15.0
+      },
+      {
+        "code": "S1",
+        "name": "Samosa",
+        "price": 12.0
+      },
+      {
+        "code": "S2",
+        "name": "Sandwich",
+        "price": 25.0
+      },
+      {
+        "code": "B1",
+        "name": "Burger",
+        "price": 40.0
+      }
+    ]
+  }
+  
