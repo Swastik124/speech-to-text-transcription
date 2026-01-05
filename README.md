@@ -1,64 +1,201 @@
-# **Cafeteria Order Management System using ESP32**  
-<img src="https://www.amazon.in/REES52-WROOM-32-Development-Microcontroller/dp/B0BSV7GBV4" alt="ESP32"></img>
+# 🥗 Smart Cafeteria Ordering System using ESP32, Bluetooth & WiFi
 
+A smart **voice-assisted cafeteria ordering system** built with **ESP32**, enabling hands-free order placement using Bluetooth voice commands, live menu fetching from a PC server, and real-time order monitoring via a web dashboard.
 
+This project is ideal for **IoT + Speech-to-Text + Smart Automation** use-cases in cafeterias, restaurants and college canteens.
 
-## **📌 Overview**  
-This project is a **smart cafeteria ordering system** built using **ESP32, Bluetooth, WiFi, and an SD card module**. It allows users to place orders via **Bluetooth commands**, stores order history, and displays real-time order updates through a **web interface** hosted on the ESP32.  
+---
 
-## **🚀 Features**  
-✅ **Bluetooth Ordering** – Users can place orders via Bluetooth commands sent to the ESP32.  
-✅ **Web Interface** – View real-time order status, menu, and order history via a web server on ESP32.  
-✅ **SD Card Storage** – Loads the menu from `menu.json` and saves order logs to `orders.json`.  
-✅ **Live Menu & Pricing** – Fetches menu items and their prices from an SD card file.  
-✅ **Order Management** – Users can:  
-   - Add menu items using predefined commands.  
-   - Remove the last added item (`CLEAR` command).  
-   - Confirm and place an order (`DONE` command).  
-✅ **WiFi Connectivity** – ESP32 connects to a WiFi network to enable web-based access.  
-✅ **Auto-Refresh Web Page** – The order display updates every 3 seconds for live monitoring.  
+## ✨ Features
 
-## **🛠 Tech Stack**  
-- **ESP32** – Microcontroller for Bluetooth and WiFi communication.  
-- **C++ (Arduino Framework)** – Core programming language.  
-- **BluetoothSerial.h** – Enables Bluetooth communication.  
-- **WiFi.h & WebServer.h** – Allows ESP32 to host a web server.  
-- **ArduinoJson.h** – Parses JSON files for menu and orders.  
-- **SD.h & SPI.h** – Reads/writes order data from an SD card.  
+* 🎙️ **Bluetooth Voice Command Input**
+  Receives food codes via mobile Bluetooth voice recognition.
 
-## **📖 How It Works**  
-1. **ESP32 Setup**:  
-   - Initializes Bluetooth as `ESP32_Audio_Receiver`.  
-   - Connects to the WiFi network.  
-   - Loads the menu from `menu.json` stored on an SD card.  
-   - Starts a web server to display orders.  
+* 🌐 **Live Menu Fetching from Server**
+  Automatically loads menu from PC server using HTTP + JSON.
 
-2. **Bluetooth Order Commands**:  
-   - Users send food item codes via Bluetooth.  
-   - The system validates the item, adds it to the order, and updates the total price.  
-   - Special commands:  
-     - **DONE** → Confirms and saves the order.  
-     - **CLEAR** → Removes the last added item.  
+* 🧾 **Dynamic Order Management**
 
-3. **Web Dashboard**:  
-   - Displays available menu items, current orders, and past orders.  
-   - Updates automatically every **3 seconds**.  
-   - Shows total price and invalid commands (if any).  
+  * Add items by food code
+  * Delete items using *DELETE → FoodCode*
+  * Clear current order using *CLEAR*
+  * Place order using *DONE*
 
-4. **Order Storage**:  
-   - Confirmed orders are logged into `orders.json` on the SD card.  
-   - Past orders can be accessed via the web interface.  
+* 📊 **Real-Time Web Dashboard**
 
-## **💾 File Structure**  
+  * View live orders on browser
+  * Auto refresh every 5 seconds
+  * Displays menu, current order & full order history
+
+* 💾 **Order Storage on PC Server**
+  Orders are sent to a backend server and saved for record keeping.
+
+---
+
+## 🛠 Hardware Used
+
+| Component   | Purpose                       |
+| ----------- | ----------------------------- |
+| ESP32       | Main controller               |
+| Smartphone  | Voice to Text Bluetooth input |
+| PC / Laptop | Backend Server                |
+| WiFi Router | Network communication         |
+
+---
+
+## 🧠 System Architecture
+
 ```
-📂 /  
- ├── main.ino            # Main ESP32 code  
- ├── menu.json           # Menu items and prices  
- ├── orders.json         # Logs of past orders  
- ├── README.md           # Documentation  
+User Voice → Mobile Bluetooth App → ESP32 → WiFi HTTP → PC Server
+                                      ↓
+                                  Web Dashboard
 ```
 
-## **🎯 Future Improvements**  
-🔹 Add **voice command support** for hands-free ordering.  
-🔹 Implement **QR code scanning** to fetch menu items.  
-🔹 Introduce a **mobile app** for seamless order placement. 
+---
+
+## 🔧 Software Requirements
+
+* Arduino IDE
+* ESP32 Board Package
+* Libraries:
+
+  * BluetoothSerial
+  * WiFi
+  * HTTPClient
+  * ArduinoJson
+  * WebServer
+
+---
+
+## 🚀 Setup Instructions
+
+### 1️⃣ Configure WiFi
+
+Update inside code:
+
+```cpp
+const char* ssid = "POCO";
+const char* password = "okbyebye";
+```
+
+---
+
+### 2️⃣ Setup PC Server
+
+Host:
+
+```
+http://<Your-PC-IP>:8000/
+```
+
+Endpoints required:
+
+| Endpoint       | Method | Purpose            |
+| -------------- | ------ | ------------------ |
+| `/menu.json`   | GET    | Send menu data     |
+| `/save_orders` | POST   | Save placed orders |
+
+Example `menu.json`:
+
+```json
+{
+  "menu": [
+    {"code":"A1","name":"Burger","price":50},
+    {"code":"B2","name":"Pizza","price":100}
+  ]
+}
+```
+
+---
+
+### 3️⃣ Upload Code to ESP32
+
+* Select board → ESP32 Dev Module
+* Upload the code.
+
+---
+
+### 4️⃣ Connect Bluetooth
+
+Search Bluetooth device:
+
+```
+ESP32_Audio_Receiver
+```
+
+Send voice commands like:
+
+```
+A1
+DELETE
+A1
+CLEAR
+DONE
+```
+
+---
+
+### 5️⃣ Open Web Dashboard
+
+Open browser:
+
+```
+http://<ESP32-IP>
+```
+
+Example:
+
+```
+http://192.168.252.135
+```
+
+---
+
+## 🧾 Available Voice Commands
+
+| Command      | Action              |
+| ------------ | ------------------- |
+| `A1`, `B2`   | Add item            |
+| `DELETE`     | Enable delete mode  |
+| `<FoodCode>` | Remove item         |
+| `CLEAR`      | Clear current order |
+| `DONE`       | Place order         |
+
+---
+
+## 📷 Output Preview
+
+* Menu Display
+* Live Current Order
+* Total Bill Calculation
+* Order History Log
+
+---
+
+## 💡 Applications
+
+* Smart Cafeterias
+* Touchless Restaurant Ordering
+* College Canteens
+* Hospitals & Public Dining Areas
+
+---
+
+## 🔒 Future Enhancements
+
+* 🔊 Audio feedback using speaker
+* 📱 Mobile App integration
+* 📦 Cloud Database support
+* 🔐 Admin Authentication Panel
+* 📊 Sales Analytics Dashboard
+
+---
+
+## 👨‍💻 Author
+
+**Swastik Mohanty**
+Electronics Engineering | Cybersecurity & IoT Enthusiast
+
+---
+
+⭐ If you like this project, don’t forget to **star this repository!**
